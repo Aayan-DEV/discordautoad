@@ -679,8 +679,4 @@ def get_sold_products():
         return jsonify({"status": "success", "sold_products": []}), 200
 
 if __name__ == '__main__':
-    # Use the port provided by Railway or default to 5000
-    port = int(os.environ.get("PORT", 5000))
-    
-    # Run Flask without SSL; Railway manages HTTPS
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=5001, ssl_context=('cert.pem', 'key.pem'))
