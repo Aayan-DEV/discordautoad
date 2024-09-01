@@ -1,6 +1,5 @@
 /Tests
 key.py
-ngrok.exe
 /server/request.py
 __pycache__/
 *.pyc

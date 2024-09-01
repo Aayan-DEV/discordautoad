@@ -25,4 +25,4 @@ COPY . .
 EXPOSE 5000
 
 # Define the default command to run the application
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "server:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "src.server:app"]
