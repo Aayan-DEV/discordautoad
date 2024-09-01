@@ -11,7 +11,6 @@ import json
 import imaplib
 import email
 from email.header import decode_header
-import ssl
 
 app = Flask(__name__)
 
@@ -680,17 +679,8 @@ def get_sold_products():
         return jsonify({"status": "success", "sold_products": []}), 200
 
 if __name__ == '__main__':
-    # Path to your SSL certificate and key files
-    cert_file = 'cert.pem'
-    key_file = 'key.pem'
-
-    # Check if the SSL certificate and key files exist
-    if not os.path.exists(cert_file) or not os.path.exists(key_file):
-        raise RuntimeError(f"SSL certificate or key file not found: {cert_file}, {key_file}")
-
-    # Create an SSL context
-    context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-    context.load_cert_chain(cert_file, key_file)
-
-    # Run Flask with HTTPS
-    app.run(port=5001, debug=True, ssl_context=context)
+    # Use the port provided by Railway or default to 5000
+    port = int(os.environ.get("PORT", 5000))
+    
+    # Run Flask without SSL; Railway manages HTTPS
+    app.run(host='0.0.0.0', port=port, debug=True)
